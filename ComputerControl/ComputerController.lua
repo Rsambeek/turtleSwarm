@@ -5,7 +5,7 @@ local gps = require("/ComputerControl/GPS/src/GPSClass")
 modem = peripheral.wrap("right")
 myGps = gps.GPSClass
 
-local deviceTypes = {["satelite"] = true,
+local deviceTypes = {["satellite"] = true,
                      ["pc"] = true,
                      ["server"] = true,
                      ["turtle"] = true}
@@ -33,6 +33,7 @@ end
 
 -- Main Code
 term.clear()
+term.setCursorPos(1,1)
 
 if os.getComputerLabel() == nil or #os.getComputerLabel() < 2 then
   local input
