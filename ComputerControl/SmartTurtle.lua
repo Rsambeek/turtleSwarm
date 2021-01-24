@@ -212,6 +212,7 @@ function SmartTurtle.goto(targetPosition)
     for i=2,#priorityQueue do
       if map[item][2] + map[item][3] > map[i][2] + map[i][3] then
         table.insert(priorityQueue, item, i)
+      end
     end
   end
 
