@@ -256,6 +256,7 @@ function SmartTurtle.goto(targetPosition)
           if map[neighbourBlock][2] == -1 or map[neighbourBlock][2] > (currentWeight + 1) then
             map[neighbourBlock][2] = (currentWeight + 1)
             map[neighbourBlock][4] = currentNode
+            insertInOrder(neighbourBlock)
           end
         end
       end

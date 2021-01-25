@@ -1,4 +1,4 @@
--- pastebin get QPvcpwU2 autoSetup.lua
+-- pastebin get RZGxa897 autoSetup.lua
 fs.delete("ComputerControl/")
 fs.delete("Programs/")
 fs.delete("startup.lua")
