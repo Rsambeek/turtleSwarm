@@ -249,6 +249,7 @@ function SmartTurtle.goto(targetPosition)
     for i=1,6 do
       local neighbourBlock = currentNodeU + SmartTurtle.directionToMovement[i]
       neighbourBlock = textutils.serialize(vector.new(neighbourBlock.x, neighbourBlock.y, neighbourBlock.z))
+      print(map[neighbourBlock])
       if map[neighbourBlock][1] ~= nil then
         table.remove(priorityQueue,1)
       else
