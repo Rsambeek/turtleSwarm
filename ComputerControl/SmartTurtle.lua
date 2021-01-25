@@ -251,7 +251,6 @@ function SmartTurtle.goto(targetPosition)
     for i=1,6 do
       local neighbourBlock = currentNodeU + SmartTurtle.directionToMovement[i]
       neighbourBlock = textutils.serialize(vector.new(neighbourBlock.x, neighbourBlock.y, neighbourBlock.z))
-      print(textutils.serialize(map[neighbourBlock]))
       if map[neighbourBlock] ~= nil and expendedQueue[neighbourBlock] == nil then
         if map[neighbourBlock][2] == -1 or map[neighbourBlock][2] > (currentWeight + 1) then
           map[neighbourBlock][2] = (currentWeight + 1)
@@ -268,7 +267,7 @@ function SmartTurtle.goto(targetPosition)
 
   local path = {targetPositionS}
   while path[1] ~= currentPositionS do
-    print(path[1])
+    --print(path[1])
     table.insert(path, 1, map[path[1]][4])
     if #path % 25 == 0 then sleep(0) end
   end
