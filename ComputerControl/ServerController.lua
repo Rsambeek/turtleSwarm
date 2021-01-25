@@ -66,7 +66,12 @@ function ServerController.mapDatabase()
         local x = tb.inputValue("X")
         local y = tb.inputValue("Y")
         local z = tb.inputValue("Z")
-        print(textutils.unserialize(map[textutils.serialize(vector.new(x, y, z))]).name)
+      end
+        targetBlock = map[textutils.serialize(vector.new(x, y, z))]
+      if targetBlock ~= nil then
+        print(textutils.unserialize(targetBlock).name)
+      else
+        print("Target Block: nil or air")
       end
     end
   end
