@@ -177,16 +177,17 @@ function SmartTurtle.goto(targetPosition)
     key = vector.new(key.x, key.y, key.z)
 
     local movementVector = (targetPosition - key)
-    if value == "nil" then
+    if value == "nil" or keyS == currentPositionS then
       value = nil
 
       map[keyS] = {value,math.huge,movementVector.length(movementVector),nil}
-      if keyS ~= currentPositionS then
+      if keyS == currentPositionS then
+        table.insert(priorityQueue,1 , keyS)
+        map[keyS][2] = 0
+      else
         table.insert(priorityQueue, keyS)
       end
     end
-    table.insert(priorityQueue,1 , currentPositionS)
-    map[currentPositionS][2] = 0
   end
 
   print("Local Map Processed")
