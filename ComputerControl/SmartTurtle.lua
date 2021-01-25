@@ -171,20 +171,22 @@ function SmartTurtle.goto(targetPosition)
   until event[1] == "modem_message" and event[3] == os.getComputerID() and event[4] == tb.phoneBook["mapChannel"]
 
   print("Received Local Map")
-  
+
   for keyS,value in pairs(event[5]) do
     local key = textutils.unserialize(keyS)
     key = vector.new(key.x, key.y, key.z)
-    
+
     local movementVector = (targetPosition - key)
-    if value == "nil" then value = nil end
-    
-    map[keyS] = {value,math.huge,movementVector.length(movementVector),nil}
-    if keyS == currentPositionS then
-      table.insert(priorityQueue,1 , keyS)
-      map[keyS][2] = 0
-    else
-      table.insert(priorityQueue, keyS)
+    if value == "nil" then
+      value = nil
+
+      map[keyS] = {value,math.huge,movementVector.length(movementVector),nil}
+      if keyS == currentPositionS then
+        table.insert(priorityQueue,1 , keyS)
+        map[keyS][2] = 0
+      else
+        table.insert(priorityQueue, keyS)
+      end
     end
   end
   
@@ -250,15 +252,11 @@ function SmartTurtle.goto(targetPosition)
       local neighbourBlock = currentNodeU + SmartTurtle.directionToMovement[i]
       neighbourBlock = textutils.serialize(vector.new(neighbourBlock.x, neighbourBlock.y, neighbourBlock.z))
       print(textutils.serialize(map[neighbourBlock]))
-      if map[neighbourBlock][1] ~= nil then
-        table.remove(priorityQueue,1)
-      else
-        if expendedQueue[neighbourBlock] == nil then
-          if map[neighbourBlock][2] == -1 or map[neighbourBlock][2] > (currentWeight + 1) then
-            map[neighbourBlock][2] = (currentWeight + 1)
-            map[neighbourBlock][4] = currentNode
-            insertInOrder(neighbourBlock)
-          end
+      if map[neighbourBlock] ~= nil and expendedQueue[neighbourBlock] == nil then
+        if map[neighbourBlock][2] == -1 or map[neighbourBlock][2] > (currentWeight + 1) then
+          map[neighbourBlock][2] = (currentWeight + 1)
+          map[neighbourBlock][4] = currentNode
+          insertInOrder(neighbourBlock)
         end
       end
     end
