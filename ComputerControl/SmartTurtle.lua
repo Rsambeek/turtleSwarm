@@ -209,7 +209,7 @@ function SmartTurtle.goto(targetPosition)
 
   local function insertInOrder(item)
     placedInOrder = false
-    for i=2,#priorityQueue do
+    for i=1,#priorityQueue do
       if i % 10 == 0 then sleep(0) end
       if map[item][2] + map[item][3] < map[priorityQueue[i]][2] + map[priorityQueue[i]][3] then
         table.insert(priorityQueue, i, item)
