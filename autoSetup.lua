@@ -1,3 +1,3 @@
 -- pastebin get QPvcpwU2 autoSetup.lua
-shell.execute("pastebin get W5ZkVYSi gitget")
-shell.execute("gitget Rsambeek turtleSwarm main")
+shell.run("pastebin get W5ZkVYSi gitget")
+shell.run("gitget Rsambeek turtleSwarm development")
