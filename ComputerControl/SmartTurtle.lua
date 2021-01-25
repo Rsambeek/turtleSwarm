@@ -217,8 +217,7 @@ function SmartTurtle.goto(targetPosition)
       if map[item][2] + map[item][3] < map[priorityQueue[i]][2] + map[priorityQueue[i]][3] then
         table.insert(priorityQueue, i, item)
         placedInOrder = true
-      end
-      if priorityQueue[i] == item then
+      elseif priorityQueue[i] == item then
         if placedInOrder then
           table.remove(priorityQueue, i)
         end
