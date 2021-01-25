@@ -219,6 +219,7 @@ function SmartTurtle.goto(targetPosition)
           table.remove(priorityQueue, i)
         end
         return
+      end
     end
   end
 
