@@ -228,6 +228,7 @@ function SmartTurtle.goto(targetPosition)
   local currentWeight
   local index = 0
   while true do
+    print(priorityQueue[1])
     if priorityQueue[1] == nil then
       print("Target Unreachable")
       return false
