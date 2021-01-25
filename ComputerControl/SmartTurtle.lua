@@ -181,7 +181,6 @@ function SmartTurtle.goto(targetPosition)
     
     map[keyS] = {value,math.huge,movementVector.length(movementVector),nil}
     if keyS == currentPositionS then
-      print(keyS)
       table.insert(priorityQueue,1 , keyS)
       map[keyS][2] = 0
     else
@@ -191,7 +190,6 @@ function SmartTurtle.goto(targetPosition)
   
   local expendedQueue = {}
   local function sortingRule(a,b)
-    sleep(0)
     local sideA
     local sideB
     if map[a][2] == math.huge then
@@ -210,10 +208,17 @@ function SmartTurtle.goto(targetPosition)
   end
 
   local function insertInOrder(item)
+    placedInOrder = false
     for i=2,#priorityQueue do
-      if map[item][2] + map[item][3] > map[i][2] + map[i][3] then
-        table.insert(priorityQueue, item, i)
+      if map[item][2] + map[item][3] < map[priorityQueue[i]][2] + map[priorityQueue[i]][3] then
+        table.insert(priorityQueue, i, item)
+        placedInOrder = true
       end
+      if priorityQueue[i] == item then
+        if placedInOrder then
+          table.remove(priorityQueue, i)
+        end
+        return
     end
   end
 
@@ -222,16 +227,16 @@ function SmartTurtle.goto(targetPosition)
   local currentWeight
   local index = 0
   while true do
-    print(#priorityQueue)
-    table.sort(priorityQueue, sortingRule)
+    --print(#priorityQueue)
+    --table.sort(priorityQueue, sortingRule)
     print("test")
     currentNode = priorityQueue[1]
     currentNodeU = textutils.unserialize(currentNode)
     currentWeight = map[currentNode][2]
-    for i=1,#priorityQueue do
-      if map[priorityQueue[i]][2] ~= -1 then
-      end
-    end
+    --for i=1,#priorityQueue do
+    --  if map[priorityQueue[i]][2] ~= -1 then
+    --  end
+    --end
     -- print(temp.x .. "," .. temp.y .. "," .. temp.z .. "|" .. targetPosition.x .. "," .. targetPosition.y .. "," .. targetPosition.z)
     if currentNode == targetPositionS then
       expendedQueue[currentNode] = currentNode
