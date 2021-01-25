@@ -223,6 +223,7 @@ function SmartTurtle.goto(targetPosition)
         end
         return
       end
+      if i % 25 == 0 then sleep(0) end
     end
   end
 
