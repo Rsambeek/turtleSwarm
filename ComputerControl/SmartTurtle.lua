@@ -181,14 +181,10 @@ function SmartTurtle.goto(targetPosition)
       value = nil
 
       map[keyS] = {value,math.huge,movementVector.length(movementVector),nil}
-      if keyS == currentPositionS then
-        table.insert(priorityQueue,1 , keyS)
-        map[keyS][2] = 0
-      else
-        table.insert(priorityQueue, keyS)
-      end
     end
   end
+  table.insert(priorityQueue,1 , currentPositionS)
+  map[currentPositionS][2] = 0
 
   print("Local Map Processed")
   
@@ -232,27 +228,18 @@ function SmartTurtle.goto(targetPosition)
   local currentWeight
   local index = 0
   while true do
-    --print(#priorityQueue)
-    --table.sort(priorityQueue, sortingRule)
-    --print("test")
+    if priorityQueue[1] == nil then
+      print("Target Unreachable")
+      return false
+    end
+
     currentNode = priorityQueue[1]
     currentNodeU = textutils.unserialize(currentNode)
     currentWeight = map[currentNode][2]
-    --for i=1,#priorityQueue do
-    --  if map[priorityQueue[i]][2] ~= -1 then
-    --  end
-    --end
-    -- print(temp.x .. "," .. temp.y .. "," .. temp.z .. "|" .. targetPosition.x .. "," .. targetPosition.y .. "," .. targetPosition.z)
+
     if currentNode == targetPositionS then
       expendedQueue[currentNode] = currentNode
       break
-    elseif currentWeight == math.huge then
-      print("Target Unreachable")
-      print(textutils.serialize(priorityQueue[1]))
-      print(textutils.serialize(priorityQueue[2]))
-      print(textutils.serialize(priorityQueue[3]))
-      print(textutils.serialize(priorityQueue[4]))
-      return false
     end
 
     for i=1,6 do
