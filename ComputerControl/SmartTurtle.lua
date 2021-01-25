@@ -182,7 +182,7 @@ function SmartTurtle.goto(targetPosition)
     map[keyS] = {value,math.huge,movementVector.length(movementVector),nil}
     if keyS == currentPositionS then
       print(keyS)
-      table.insert(priorityQueue, keyS, 1)
+      table.insert(priorityQueue,1 , keyS)
       map[keyS][2] = 0
     else
       table.insert(priorityQueue, keyS)
