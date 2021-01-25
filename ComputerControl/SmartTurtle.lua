@@ -234,9 +234,8 @@ function SmartTurtle.goto(targetPosition)
   while true do
     --print(#priorityQueue)
     --table.sort(priorityQueue, sortingRule)
-    print("test")
+    --print("test")
     currentNode = priorityQueue[1]
-    print(currentNode)
     currentNodeU = textutils.unserialize(currentNode)
     currentWeight = map[currentNode][2]
     --for i=1,#priorityQueue do
@@ -249,6 +248,10 @@ function SmartTurtle.goto(targetPosition)
       break
     elseif currentWeight == math.huge then
       print("Target Unreachable")
+      print(textutils.serialize(priorityQueue[1]))
+      print(textutils.serialize(priorityQueue[2]))
+      print(textutils.serialize(priorityQueue[3]))
+      print(textutils.serialize(priorityQueue[4]))
       return false
     end
 
