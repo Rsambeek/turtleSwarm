@@ -189,6 +189,8 @@ function SmartTurtle.goto(targetPosition)
       end
     end
   end
+
+  print("Local Map Processed")
   
   local expendedQueue = {}
   local function sortingRule(a,b)
@@ -226,13 +228,13 @@ function SmartTurtle.goto(targetPosition)
   end
 
   local currentNode
-  local currentNodeS
+  local currentNodeU
   local currentWeight
   local index = 0
   while true do
     --print(#priorityQueue)
     --table.sort(priorityQueue, sortingRule)
-    print("test")
+    --print("test")
     currentNode = priorityQueue[1]
     currentNodeU = textutils.unserialize(currentNode)
     currentWeight = map[currentNode][2]
@@ -244,7 +246,8 @@ function SmartTurtle.goto(targetPosition)
     if currentNode == targetPositionS then
       expendedQueue[currentNode] = currentNode
       break
-    elseif currentWeight == -1 then
+    elseif currentWeight == math.huge then
+      print("Target Unreachable")
       return false
     end
 
@@ -264,14 +267,17 @@ function SmartTurtle.goto(targetPosition)
     index = index+1
     if index % 10 == 0 then sleep(0) end
   end
+  print("Path found")
 
   local path = {targetPositionS}
   while path[1] ~= currentPositionS do
     --print(path[1])
     table.insert(path, 1, map[path[1]][4])
-    if #path % 25 == 0 then sleep(0) end
+    if #path % 25 == 0 then
+      sleep(0)
+      print("check")
+    end
   end
-  print("Path found")
   print("Executing movement")
   local path1,path2
   while path[1] ~= targetPositionS do
