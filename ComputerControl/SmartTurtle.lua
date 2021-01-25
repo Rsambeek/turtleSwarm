@@ -229,6 +229,7 @@ function SmartTurtle.goto(targetPosition)
   local index = 0
   while true do
     print(priorityQueue[1])
+    print(priorityQueue[2])
     if priorityQueue[1] == nil then
       print("Target Unreachable")
       return false
