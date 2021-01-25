@@ -9,6 +9,7 @@ GPSClass.position = nil
 GPSClass.hasFix = false
 
 function GPSClass.trilaterate( A, B, C )
+
     A[1] = vector.new(A[1]["x"], A[1]["y"], A[1]["z"])
     B[1] = vector.new(B[1]["x"], B[1]["y"], B[1]["z"])
     C[1] = vector.new(C[1]["x"], C[1]["y"], C[1]["z"])
@@ -66,7 +67,7 @@ end
 
 function GPSClass.locate()
   responses = GPSClass.requestSatellites(1)
-  if responses ~= nil or #responses >= 4 then
+  if responses ~= nil and #responses >= 4 then
     local i=3
     local pos1, pos2
     while true do
