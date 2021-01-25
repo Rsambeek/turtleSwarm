@@ -234,7 +234,7 @@ function SmartTurtle.goto(targetPosition)
   while true do
     --print(#priorityQueue)
     --table.sort(priorityQueue, sortingRule)
-    --print("test")
+    print("test")
     currentNode = priorityQueue[1]
     currentNodeU = textutils.unserialize(currentNode)
     currentWeight = map[currentNode][2]
