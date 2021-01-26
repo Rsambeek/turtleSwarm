@@ -6,21 +6,23 @@ ArrayStorage.drives = {peripheral.find("drive")}
 ArrayStorage.fillingDrive = ""
 ArrayStorage.dictionary = {}
 
-for i=1,#ArrayStorage.drives do
-    driveName = "disk"
-    if i ~= 1 then
-        driveName = (driveName .. i)
-    end
-    driveName = ("/" .. driveName .. "/file")
-    ArrayStorage.drives[i] = driveName
-    if fs.exists(driveName) then
-        ArrayStorage.fillingDrive = (driveName)
-        file = fs.open(driveName, "r")
-        temp = textutils.unserialize(file.readAll())
-        file.close()
+function syncArray()
+    for i=1,#ArrayStorage.drives do
+        driveName = "disk"
+        if i ~= 1 then
+            driveName = (driveName .. i)
+        end
+        driveName = ("/" .. driveName .. "/file")
+        ArrayStorage.drives[i] = driveName
+        if fs.exists(driveName) then
+            ArrayStorage.fillingDrive = (driveName)
+            file = fs.open(driveName, "r")
+            temp = textutils.unserialize(file.readAll())
+            file.close()
 
-        for k,_ in pairs(temp) do
-            ArrayStorage.dictionary[k] = (driveName)
+            for k,_ in pairs(temp) do
+                ArrayStorage.dictionary[k] = (driveName)
+            end
         end
     end
 end
@@ -69,12 +71,12 @@ function ArrayStorage.readValues(keys)
 end
 
 function ArrayStorage.writeValue(key, data)
+    print(ArrayStorage.dictionary[key])
     if ArrayStorage.dictionary[key] == nil then
         ArrayStorage.setFillingDrive()
         ArrayStorage.dictionary[key] = ArrayStorage.fillingDrive
     end
     local fileData = {}
-    print(ArrayStorage.dictionary[key])
     if fs.exists(ArrayStorage.dictionary[key]) then
         file = fs.open(ArrayStorage.dictionary[key], "r")
         fileData = textutils.unserialize(file.readAll())
@@ -90,7 +92,6 @@ end
 function ArrayStorage.writeValues(data)
     local newEntries = {}
     local loadedDrives = {}
-    print(ArrayStorage.dictionary[key])
     for i=1,#ArrayStorage.drives do
         if fs.exists(ArrayStorage.drives[i]) then
             file = fs.open(ArrayStorage.drives[i], "r")
