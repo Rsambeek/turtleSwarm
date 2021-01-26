@@ -1,10 +1,11 @@
 local tb = require("/Toolbox")
-local arrayStorage = require("/arrayStorage/ArrayStorage")
+local as = require("/arrayStorage/ArrayStorage")
 
 ServerController = {data={}}
 
 function ServerController.mapDatabase()
   local map = {}
+  local arrayStorage = as.ArrayStorage
   local previousSettings = tb.getSettingFile("mapDB")
   if previousSettings[1] then
     map = previousSettings[2]
