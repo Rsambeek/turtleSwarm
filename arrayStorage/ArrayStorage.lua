@@ -75,6 +75,7 @@ function ArrayStorage.writeValue(key, data)
     end
     local fileData = {}
     if fs.exists(ArrayStorage.dictionary[key]) then
+        print(ArrayStorage.dictionary[key])
         file = fs.open(ArrayStorage.dictionary[key], "r")
         fileData = textutils.unserialize(file.readAll())
         file.close()
