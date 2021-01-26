@@ -90,6 +90,7 @@ end
 function ArrayStorage.writeValues(data)
     local newEntries = {}
     local loadedDrives = {}
+    print(ArrayStorage.dictionary[key])
     for i=1,#ArrayStorage.drives do
         if fs.exists(ArrayStorage.drives[i]) then
             file = fs.open(ArrayStorage.drives[i], "r")
