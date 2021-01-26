@@ -6,6 +6,7 @@ ServerController = {data={}}
 function ServerController.mapDatabase()
   local map = {}
   local arrayStorage = as.ArrayStorage
+  arrayStorage.syncArray()
   local previousSettings = tb.getSettingFile("mapDB")
   if previousSettings[1] then
     map = previousSettings[2]
