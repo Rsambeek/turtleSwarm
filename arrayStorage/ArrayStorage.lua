@@ -6,7 +6,7 @@ ArrayStorage.drives = {peripheral.find("drive")}
 ArrayStorage.fillingDrive = ""
 ArrayStorage.dictionary = {}
 
-function syncArray()
+function ArrayStorage.syncArray()
     print("Syncing Array")
     for i=1,#ArrayStorage.drives do
         driveName = "disk"
