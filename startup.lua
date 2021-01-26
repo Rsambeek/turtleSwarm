@@ -1,1 +1,1 @@
-shell.execute("ComputerControl/ComputerController.lua")
+shell.execute("/turtleSwarm/ComputerControl/ComputerController.lua")

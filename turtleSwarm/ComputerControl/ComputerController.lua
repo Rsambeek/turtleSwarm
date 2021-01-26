@@ -1,5 +1,5 @@
-local tb = require("/Toolbox")
-local gps = require("/ComputerControl/GPS/src/GPSClass")
+local tb = require("/turtleSwarm/Toolbox")
+local gps = require("/turtleSwarm/ComputerControl/GPS/src/GPSClass")
 
 -- Instanciate dependencies
 modem = peripheral.wrap("right")
@@ -20,7 +20,7 @@ function startGps(deviceType)
     gpsType = "dynamic"
   end
 
-  local gpsControl = multishell.launch({require = require, tb = tb, myGps = myGps, modem = modem}, "/ComputerControl/GPS/GPSController.lua", gpsType)
+  local gpsControl = multishell.launch({require = require, tb = tb, myGps = myGps, modem = modem}, "/turtleSwarm/ComputerControl/GPS/GPSController.lua", gpsType)
   multishell.setTitle(gpsControl, "GPS Controller")
 
   repeat
@@ -78,7 +78,7 @@ elseif deviceSettings["deviceType"] == "server" then
   print("Server node Activated")
   startGps("pc")
 
-  local ServerController = require("/ComputerControl/ServerController")
+  local ServerController = require("/turtleSwarm/ComputerControl/ServerController")
   serverController = ServerController.ServerController
 
   print("Server API Loaded")
@@ -93,7 +93,7 @@ elseif deviceSettings["deviceType"] == "turtle" then
   print("Turtle Worker Activated")
   startGps("turtle")
 
-  local SmartTurtle = require("/ComputerControl/SmartTurtle")
+  local SmartTurtle = require("/turtleSwarm/ComputerControl/SmartTurtle")
   smartTurtle = SmartTurtle.SmartTurtle
   
   print("Turtle API Loaded")
