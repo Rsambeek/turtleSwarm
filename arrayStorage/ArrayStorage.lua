@@ -81,6 +81,8 @@ function ArrayStorage.writeValue(key, data)
         file = fs.open(ArrayStorage.dictionary[key], "r")
         fileData = textutils.unserialize(file.readAll())
         file.close()
+    else
+        print("Bruh")
     end
     print(key)
     fileData[key] = data
