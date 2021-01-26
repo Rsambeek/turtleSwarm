@@ -1,4 +1,4 @@
-local tb = require("/turtleSwarm/Toolbox")
+local tb = require("/Toolbox")
 local gps = require("/turtleSwarm/ComputerControl/GPS/src/GPSClass")
 
 -- Instanciate dependencies

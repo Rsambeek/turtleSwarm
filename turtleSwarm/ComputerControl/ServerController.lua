@@ -1,4 +1,5 @@
 local tb = require("/Toolbox")
+local arrayStorage = require("/arrayStorage/ArrayStorage")
 
 ServerController = {data={}}
 
@@ -15,22 +16,24 @@ function ServerController.mapDatabase()
       local event = { os.pullEvent() }
       if event[1] == "modem_message" and event[3] == tb.phoneBook["mapChannel"] then
         if event[5][1] == "updateMap" then
+          local request = {}
           turtlePosition = event[5][2]
           for index, block in pairs(event[5][3]) do
             if block.name ~= "minecraft:air" then
               block.x = block.x + turtlePosition.x
               block.y = block.y + turtlePosition.y
               block.z = block.z + turtlePosition.z
-              map[textutils.serialize(vector.new(block.x, block.y, block.z))] = textutils.serialize(block)
-              -- map[vector.new(block.x, block.y, block.z)] = textutils.serialize(block)
+              request[textutils.serialize(vector.new(block.x, block.y, block.z))] = textutils.serialize(block)
             end
-            if (index % 30 == 0) then sleep(0.05) end
+            if (index % 30 == 0) then sleep(0) end
           end
-          tb.setSettingFile("mapDB", map)
+          arrayStorage.writeValues(request)
+          --tb.setSettingFile("mapDB", map)
         elseif event[5][1] == "readMap" then
           print("request received")
           local startVector = event[5][2]
           local endVector = event[5][3]
+          local request = {}
           local blocks = {}
           local indexVector = vector.new()
           for i=startVector.x,endVector.x do
@@ -39,16 +42,13 @@ function ServerController.mapDatabase()
               indexVector.y = j
               for k=startVector.z,endVector.z do
                 indexVector.z = k
-                if map[textutils.serialize(indexVector)] ~= nil then
-                  blocks[textutils.serialize(indexVector)] = textutils.unserialize(map[textutils.serialize(indexVector)])
-                else
-                  blocks[textutils.serialize(indexVector)] = "nil"
-                end
+                list.insert(request,indexVector)
                 if ((((i-1)*endVector.y) + ((j-1)*endVector.z) + k) % 100 == 0) then sleep(0) end
               end
             end
           end
-          sleep(0.1)
+          blocks = arrayStorage.readValues(request)
+          sleep(1)
           print("Data Send")
           modem.transmit(event[4], tb.phoneBook["mapChannel"], blocks)
         end
@@ -61,13 +61,14 @@ function ServerController.mapDatabase()
     while true do
       local command = tb.inputValue("Command")
       if command == "dump" then
-        print(textutils.serialize(map))
+        --print(textutils.serialize(map))
+        print("Command not supported")
       elseif command == "getBlock" then
         local x = tb.inputValue("X")
         local y = tb.inputValue("Y")
         local z = tb.inputValue("Z")
       end
-        targetBlock = map[textutils.serialize(vector.new(x, y, z))]
+        targetBlock = arrayStorage.readValue(textutils.serialize(vector.new(x, y, z)))
       if targetBlock ~= nil then
         print(textutils.unserialize(targetBlock).name)
       else
