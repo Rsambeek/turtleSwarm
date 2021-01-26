@@ -2,7 +2,7 @@ local tb = require("/Toolbox")
 
 ArrayStorage = {data={}}
 
-ArrayStorage.drives = #{peripheral.find("drive")}
+ArrayStorage.drives = {peripheral.find("drive")}
 ArrayStorage.fillingDrive = ""
 ArrayStorage.dictionary = {}
 
