@@ -82,7 +82,7 @@ function ArrayStorage.writeValue(key, data)
         fileData = textutils.unserialize(file.readAll())
         file.close()
     end
-    print(ArrayStorage.dictionary[key])
+    print(textutils.serialize(fileData))
     fileData[key] = data
 
     file = fs.open(ArrayStorage.dictionary[key], "w")
@@ -124,7 +124,7 @@ function ArrayStorage.writeValues(data)
 
     for key,value in pairs(newEntries) do
         ArrayStorage.writeValue(key,value)
-        sleep(0)
+        sleep(0.05)
     end
     print("Stored New Data")
 end
