@@ -30,8 +30,8 @@ end
 
 function ArrayStorage.setFillingDrive()
     if fs.getFreeSpace(ArrayStorage.fillingDrive) < 1000 then
-        for i=1,#drives do
-            if drives[i] == ArrayStorage.fillingDrive then
+        for i=1,#ArrayStorage.drives do
+            if ArrayStorage.drives[i] == ArrayStorage.fillingDrive then
                 if i == #drives then
                     print("Storage Array Full")
                     return false
@@ -72,14 +72,11 @@ function ArrayStorage.readValues(keys)
 end
 
 function ArrayStorage.writeValue(key, data)
-    print(ArrayStorage.dictionary[key])
     if ArrayStorage.dictionary[key] == nil then
         ArrayStorage.setFillingDrive()
         ArrayStorage.dictionary[key] = ArrayStorage.fillingDrive
     end
     local fileData = {}
-    print(ArrayStorage.dictionary[key])
-    print(fs.exists(ArrayStorage.dictionary[key]))
     if fs.exists(ArrayStorage.dictionary[key]) then
         file = fs.open(ArrayStorage.dictionary[key], "r")
         fileData = textutils.unserialize(file.readAll())
@@ -103,6 +100,7 @@ function ArrayStorage.writeValues(data)
         end
         sleep(0)
     end
+    print("loaded Drives")
 
     for key,value in pairs(data) do
         sleep(0)
@@ -112,6 +110,7 @@ function ArrayStorage.writeValues(data)
             loadedDrives[ArrayStorage.dictionary[key]][key] = value
         end
     end
+    print("Filtered Data")
     for i=1,#ArrayStorage.drives do
         if loadedDrives[i] ~= nil then
             file = fs.open(ArrayStorage.drives[i], "w")
@@ -120,11 +119,13 @@ function ArrayStorage.writeValues(data)
         end
         sleep(0)
     end
+    print("Updated Data")
 
     for key,value in pairs(newEntries) do
         ArrayStorage.writeValue(key,value)
         sleep(0)
     end
+    print("Stored New Data")
 end
 
 return {ArrayStorage = ArrayStorage}
