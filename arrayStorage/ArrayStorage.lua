@@ -7,6 +7,7 @@ ArrayStorage.fillingDrive = ""
 ArrayStorage.dictionary = {}
 
 function syncArray()
+    print("Syncing Array")
     for i=1,#ArrayStorage.drives do
         driveName = "disk"
         if i ~= 1 then
@@ -124,4 +125,5 @@ function ArrayStorage.writeValues(data)
     end
 end
 
+ArrayStorage.syncArray()
 return {ArrayStorage = ArrayStorage}
