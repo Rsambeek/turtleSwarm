@@ -41,15 +41,18 @@ function ArrayStorage.setFillingDrive()
 end
 
 function ArrayStorage.readValue(key)
-    file = fs.open(ArrayStorage.dictionary[key], "r")
-    output = textutils.unserialize(file.readAll())[key]
-    file.close()
+    local output
+    if ArrayStorage.dictionary[key] ~= nil then
+        file = fs.open(ArrayStorage.dictionary[key], "r")
+        output = textutils.unserialize(file.readAll())[key]
+        file.close()
+    end
     return output
 end
 
 function ArrayStorage.readValues(keys)
     local loadedDrives = {}
-    output = {}
+    local output = {}
     for i=1,#ArrayStorage.drives do
         if fs.exists(ArrayStorage.drives[i]) then
             file = fs.open(ArrayStorage.drives[i], "r")
