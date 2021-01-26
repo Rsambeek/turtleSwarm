@@ -78,6 +78,7 @@ function ArrayStorage.writeValue(key, data)
         ArrayStorage.dictionary[key] = ArrayStorage.fillingDrive
     end
     local fileData = {}
+    print(ArrayStorage.dictionary[key])
     print(fs.exists(ArrayStorage.dictionary[key]))
     if fs.exists(ArrayStorage.dictionary[key]) then
         file = fs.open(ArrayStorage.dictionary[key], "r")
