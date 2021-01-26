@@ -78,6 +78,7 @@ function ArrayStorage.writeValue(key, data)
         ArrayStorage.dictionary[key] = ArrayStorage.fillingDrive
     end
     local fileData = {}
+    print(fs.exists(ArrayStorage.dictionary[key]))
     if fs.exists(ArrayStorage.dictionary[key]) then
         file = fs.open(ArrayStorage.dictionary[key], "r")
         fileData = textutils.unserialize(file.readAll())
@@ -125,5 +126,4 @@ function ArrayStorage.writeValues(data)
     end
 end
 
-ArrayStorage.syncArray()
 return {ArrayStorage = ArrayStorage}
